@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Push'),
     );
   }
 }
@@ -31,8 +31,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String token;
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  void _getToken() {
+  void _getToken() async{
+    token = await _firebaseMessaging.getToken();
+    print(token);
     setState(() {
 
     });
@@ -50,10 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
+              token,
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
